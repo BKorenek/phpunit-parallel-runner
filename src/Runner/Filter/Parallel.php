@@ -1,6 +1,8 @@
 <?php namespace PhpUnit\Runner\Filter;
 
 use InvalidArgumentException;
+use PHPUnit_Framework_Test;
+use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_TestSuite;
 use RecursiveIterator;
 use RecursiveFilterIterator;
@@ -18,7 +20,10 @@ class Parallel extends RecursiveFilterIterator {
         parent::__construct($iterator);
 
         $this->setFilter($filter[0], $filter[1]);
-        self::$counter = 0;
+
+        if (!isset(self::$counter)) {
+            self::$counter = 0;
+        }
     }
 
     /**
